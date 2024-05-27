@@ -54,7 +54,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'flex-end',
   padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
 
@@ -126,9 +125,10 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+            CarApp
           </Typography>
+          <img src="/carimage.png" alt="CarApp Logo" style={{ height: 40 }} />
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
