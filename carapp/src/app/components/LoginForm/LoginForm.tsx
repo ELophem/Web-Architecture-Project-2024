@@ -9,7 +9,7 @@ interface FormData {
 }
 
 const LoginForm: React.FC = () => {
-  const { updateAuthState } = useAuth(); // Get updateAuthState from AuthContext
+  const { updateAuthState } = useAuth(); 
   const [formData, setFormData] = useState<FormData>({ username: '', password: '' });
   const [errorMessage, setErrorMessage] = useState<string>('');
 
@@ -21,8 +21,8 @@ const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await signIn(formData, updateAuthState); // Pass formData and updateAuthState
-      //window.location.href = '/';
+      await signIn(formData, updateAuthState); 
+      //window.location.href = '/catalog';
     } catch (error) {
       setErrorMessage(error as string);
     }

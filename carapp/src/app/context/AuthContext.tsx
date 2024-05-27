@@ -5,7 +5,7 @@ interface AuthContextType {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
-  updateAuthState: (loggedIn: boolean) => void; // Function to update auth state
+  updateAuthState: (loggedIn: boolean) => void; 
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
