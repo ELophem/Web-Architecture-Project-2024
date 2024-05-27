@@ -5,7 +5,7 @@ interface AuthContextType {
   isLoggedIn: boolean;
   login: () => void;
   logout: () => void;
-  updateAuthState: (loggedIn: boolean) => void; 
+  updateAuthState: (loggedIn: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,13 +26,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = () => {
-    
     setIsLoggedIn(true);
     console.log('isLoggedIn:', isLoggedIn);
   };
 
   const logout = () => {
-    // Perform logout logic
     setIsLoggedIn(false);
   };
 
