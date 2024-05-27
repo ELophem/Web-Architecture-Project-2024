@@ -22,7 +22,7 @@ import Link from 'next/link';
 import HomeIcon from '@mui/icons-material/Home';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InfoIcon from '@mui/icons-material/Info';
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 
 import LogoutIcon from '@mui/icons-material/Logout';
 
@@ -139,8 +139,8 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Home', 'Catalog', 'Account', 'About'].map((text, index) => (
-            <Link key={text} href={index % 4 === 0 ? '/' : index % 4 === 1 ? '/pages/catalog' : index % 4 === 2 ? '/pages/account' : '/pages/about'}>
+          {['Home', 'Catalog', 'Account', 'Add Car'].map((text, index) => (
+            <Link key={text} href={index % 4 === 0 ? '/' : index % 4 === 1 ? '/catalog' : index % 4 === 2 ? '/account' : '/addcar'}>
               <ListItem disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                   sx={{
@@ -156,7 +156,7 @@ export default function MiniDrawer() {
                       justifyContent: 'center',
                     }}
                   >
-                    {index % 4 === 0 ? <HomeIcon /> : index % 4 === 1 ? <DirectionsCarIcon /> : index % 4 === 2 ? <AccountCircleIcon /> : <InfoIcon />}
+                    {index % 4 === 0 ? <HomeIcon /> : index % 4 === 1 ? <DirectionsCarIcon /> : index % 4 === 2 ? <AccountCircleIcon /> : <LibraryAddIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
