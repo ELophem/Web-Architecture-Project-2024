@@ -14,15 +14,14 @@ type Car = {
 };
 
 const fetchCars = async () => {
-  const token = localStorage.getItem('token');
-  
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch('http://localhost:4000/api/cars', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      next: { revalidate: 10 } 
+      next: { revalidate: 10 }
     });
 
     if (!response.ok) {
@@ -37,9 +36,8 @@ const fetchCars = async () => {
 };
 
 const deleteCar = async (id: number) => {
-  const token = localStorage.getItem('token');
-  
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch(`http://localhost:4000/api/cars/${id}`, {
       method: 'DELETE',
       headers: {
@@ -64,7 +62,7 @@ const deleteCar = async (id: number) => {
 export default function Catalog() {
   const [cars, setCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(true);
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +72,9 @@ export default function Catalog() {
     };
 
     fetchData();
+
+    const adminStatus = localStorage.getItem('isAdmin') === 'true';
+    setIsAdmin(adminStatus);
   }, []);
 
   const handleDelete = async (id: number) => {

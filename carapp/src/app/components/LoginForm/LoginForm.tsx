@@ -1,12 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '../../context/AuthContext';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const { login } = useAuth();
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -32,7 +34,7 @@ const LoginForm = () => {
       const decodedToken = JSON.parse(atob(data.token.split('.')[1]));
       localStorage.setItem('isAdmin', decodedToken.isAdmin);
 
-
+      login(data.token, decodedToken.isAdmin);
       router.push('/catalog');
     } catch (error) {
       setError('An unexpected error occurred');
