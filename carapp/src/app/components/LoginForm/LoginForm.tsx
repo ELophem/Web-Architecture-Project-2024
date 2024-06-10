@@ -31,6 +31,7 @@ const LoginForm = () => {
 
       // Store the token and admin status in localStorage
       localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
       const decodedToken = JSON.parse(atob(data.token.split('.')[1]));
       localStorage.setItem('isAdmin', decodedToken.isAdmin);
 

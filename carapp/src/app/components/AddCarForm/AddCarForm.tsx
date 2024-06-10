@@ -3,6 +3,7 @@ import React, { useState, FormEvent } from 'react';
 import { Input } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import axios from 'axios';
+import './AddCarForm.css';
 
 export default function AddCarForm() {
   const [manufacturer, setManufacturer] = useState('');
@@ -11,11 +12,13 @@ export default function AddCarForm() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [location, setLocation] = useState('');
-  const [userId, setUserId] = useState('');
   const [formSubmitMessage, setFormSubmitMessage] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Retrieve user ID from local storage or state
+    const userId = localStorage.getItem('userId')||'';
 
     const newCar = {
       manufacturer,
@@ -24,7 +27,7 @@ export default function AddCarForm() {
       description,
       price: parseFloat(price),
       location,
-      userId: parseInt(userId),
+      userId: parseInt(userId), // Use the user ID obtained from local storage or state
     };
 
     try {
@@ -32,14 +35,12 @@ export default function AddCarForm() {
 
       if (response.status === 200) {
         setFormSubmitMessage('Car added successfully');
-        // Reset form fields after successful submission
         setManufacturer('');
         setModel('');
         setPictures('');
         setDescription('');
         setPrice('');
         setLocation('');
-        setUserId('');
       } else {
         setFormSubmitMessage('Failed to add car');
       }
@@ -50,7 +51,7 @@ export default function AddCarForm() {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
         <Input label="Manufacturer" value={manufacturer} onChange={(e) => setManufacturer(e.target.value)} required />
         <Input label="Model" value={model} onChange={(e) => setModel(e.target.value)} required />
@@ -58,7 +59,6 @@ export default function AddCarForm() {
         <Input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
         <Input label="Price" value={price} type="number" onChange={(e) => setPrice(e.target.value)} required />
         <Input label="Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
-        <Input label="User ID" value={userId} onChange={(e) => setUserId(e.target.value)} required />
         <Button type="submit">Add Car</Button>
       </form>
       <p>{formSubmitMessage}</p>
