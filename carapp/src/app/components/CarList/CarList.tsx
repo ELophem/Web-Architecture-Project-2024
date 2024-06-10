@@ -95,15 +95,16 @@ const CarList = () => {
           <h2 className="text-xl font-bold">
             {car.manufacturer} {car.model}
           </h2>
-          <p>{car.description}</p>
-          <p>Price: ${car.price}</p>
-          <p>Location: {car.location}</p>
           <img
             src={car.pictures}
             alt={`Picture of ${car.manufacturer} ${car.model}`}
             width={200}
             height={150}
           />
+          <p>{car.description}</p>
+          <p>Price: ${car.price}</p>
+          <p>Location: {car.location}</p>
+
           {isAdmin && (
             <button
               onClick={() => handleDelete(car.id)}
