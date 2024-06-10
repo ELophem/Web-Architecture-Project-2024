@@ -22,8 +22,8 @@ import Link from 'next/link';
 
 import HomeIcon from '@mui/icons-material/Home';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LoginIcon from '@mui/icons-material/Login';
 
@@ -141,8 +141,8 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Home', 'Catalog', 'Account', 'Add Car'].map((text, index) => (
-            <Link key={text} href={index % 4 === 0 ? '/' : index % 4 === 1 ? '/catalog' : index % 4 === 2 ? '/account' : '/addcar'}>
+          {['Home', 'Catalog', 'Add Car'].map((text, index) => (
+            <Link key={text} href={index % 3 === 0 ? '/' : index % 3 === 1 ? '/catalog' : '/addcar'}>
               <ListItem disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                   sx={{
@@ -158,7 +158,7 @@ export default function MiniDrawer() {
                       justifyContent: 'center',
                     }}
                   >
-                    {index % 4 === 0 ? <HomeIcon /> : index % 4 === 1 ? <DirectionsCarIcon /> : index % 4 === 2 ? <AccountCircleIcon /> : <LibraryAddIcon />}
+                    {index % 3 === 0 ? <HomeIcon /> : index % 3 === 1 ? <DirectionsCarIcon /> : <LibraryAddIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
@@ -217,11 +217,37 @@ export default function MiniDrawer() {
             </Link>
           )}
         </List>
+        {!isLoggedIn && (
+          <List>
+            <Link key="CreateAccount" href="/account" passHref>
+              <ListItem disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  sx={{
+                    minHeight: 48,
+                    justifyContent: open ? 'initial' : 'center',
+                    px: 2.5,
+                  }}
+                >
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : 'auto',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Create Account" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+          </List>
+        )}
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        
       </Box>
     </Box>
   );
 }
+ 
