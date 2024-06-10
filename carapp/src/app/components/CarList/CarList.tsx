@@ -1,6 +1,3 @@
-'use client';
-import { useEffect, useState } from 'react';
-
 type Car = {
   id: number;
   manufacturer: string;
@@ -11,27 +8,11 @@ type Car = {
   location: string;
 };
 
-const CarList = () => {
-  const [cars, setCars] = useState<Car[]>([]);
+type CarListProps = {
+  cars: Car[];
+};
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://localhost:4000/api/cars');
-        if (response.ok) {
-          const data = await response.json();
-          setCars(data);
-        } else {
-          console.error('Failed to fetch cars:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error fetching cars:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+const CarList = ({ cars }: CarListProps) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       {cars.map((car) => (
