@@ -17,4 +17,20 @@
   .form-container form button {
     margin-top: 10px;
   }
+  .form-container form button {
+    margin-top: 10px;
+    background-color: rgb(25, 118, 210);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .form-container form button:hover {
+    background-color: rgb(21, 101, 182);
+  }
+  
+  
   

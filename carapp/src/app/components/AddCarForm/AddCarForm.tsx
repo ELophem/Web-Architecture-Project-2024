@@ -17,7 +17,7 @@ export default function AddCarForm() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    // Retrieve user ID from local storage or state
+
     const userId = localStorage.getItem('userId')||'';
 
     const newCar = {
@@ -27,7 +27,7 @@ export default function AddCarForm() {
       description,
       price: parseFloat(price),
       location,
-      userId: parseInt(userId), // Use the user ID obtained from local storage or state
+      userId: parseInt(userId), 
     };
 
     try {
