@@ -1,3 +1,5 @@
+import React from 'react';
+
 type Car = {
   id: number;
   manufacturer: string;
@@ -10,9 +12,11 @@ type Car = {
 
 type CarListProps = {
   cars: Car[];
+  onDelete: (id: number) => void;
+  isAdmin: boolean;
 };
 
-const CarList = ({ cars }: CarListProps) => {
+const CarList = ({ cars, onDelete, isAdmin }: CarListProps) => {
   return (
     <div className="grid grid-cols-3 gap-4">
       {cars.map((car) => (
@@ -24,6 +28,14 @@ const CarList = ({ cars }: CarListProps) => {
           <p>Price: ${car.price}</p>
           <p>Location: {car.location}</p>
           <img src={car.pictures} alt={`Picture of ${car.manufacturer} ${car.model}`} width={200} height={150} />
+          {isAdmin && (
+            <button
+              onClick={() => onDelete(car.id)}
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+            >
+              Delete
+            </button>
+          )}
         </div>
       ))}
     </div>

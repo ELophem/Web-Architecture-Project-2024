@@ -1,39 +1,81 @@
 'use client';
 import React, { useState } from 'react';
-import { useAuth } from '@/app/context/AuthContext';
-import { signIn } from '@/app/lib/actions';
+import { useRouter } from 'next/navigation';
 
-interface FormData {
-  username: string;
-  password: string;
-}
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
-const LoginForm: React.FC = () => {
-  const { updateAuthState } = useAuth(); 
-  const [formData, setFormData] = useState<FormData>({ username: '', password: '' });
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const handleLogin = async (event: React.FormEvent) => {
+    event.preventDefault();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     try {
-      await signIn(formData, updateAuthState); 
-      //window.location.href = '/catalog';
+      const response = await fetch('http://localhost:4000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.error || 'Failed to login');
+        return;
+      }
+
+      // Store the token and admin status in localStorage
+      localStorage.setItem('token', data.token);
+      const decodedToken = JSON.parse(atob(data.token.split('.')[1]));
+      localStorage.setItem('isAdmin', decodedToken.isAdmin);
+
+
+      router.push('/catalog');
     } catch (error) {
-      setErrorMessage(error as string);
+      setError('An unexpected error occurred');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="username" placeholder="Username" value={formData.username} onChange={handleChange} required />
-      <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-      <div>{errorMessage && <p>{errorMessage}</p>}</div>
-      <button type="submit">Login</button>
+    <form onSubmit={handleLogin} className="flex flex-col items-center">
+      <div className="mb-4">
+        <label className="block text-sm font-bold mb-2" htmlFor="username">
+          Username
+        </label>
+        <input
+          id="username"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-bold mb-2" htmlFor="password">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        />
+      </div>
+      {error && <p className="text-red-500 text-xs italic">{error}</p>}
+      <div className="mb-4">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Login
+        </button>
+      </div>
     </form>
   );
 };
