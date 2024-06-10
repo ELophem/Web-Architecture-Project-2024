@@ -37,8 +37,8 @@ const RegisterForm = () => {
         return;
       }
 
-      // Registration successful, redirect or show a success message
-      router.push('/login'); // Redirect to login page after registration
+
+      router.push('/login'); 
     } catch (error) {
       setError('An unexpected error occurred');
     }

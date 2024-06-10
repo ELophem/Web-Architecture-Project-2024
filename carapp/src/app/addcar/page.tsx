@@ -1,6 +1,5 @@
-'use client';
 import React from 'react';
-import AddCarForm from '@/app/components/AddCarForm/AddCarForm';
+import AddCarForm from '../components/AddCarForm/AddCarForm';
 import ProtectedRoute from '../components/ProtectedRoutes/ProtectedRoutes';
 
 export default function AddCar() {
