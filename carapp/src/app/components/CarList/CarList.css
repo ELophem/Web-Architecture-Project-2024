@@ -1,0 +1,67 @@
+.car-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .car-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .car-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .car-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .car-card-content {
+    padding: 15px;
+  }
+  
+  .car-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .car-card-description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .car-card-price,
+  .car-card-location {
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+  
+  .delete-button {
+    background-color: #e53e3e;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .delete-button:hover {
+    background-color: #c53030;
+  }
+  
+  .delete-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.5);
+  }
+  

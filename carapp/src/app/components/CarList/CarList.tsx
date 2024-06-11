@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import './CarList.css';
 
 type Car = {
   id: number;
@@ -89,30 +90,30 @@ const CarList = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="car-list">
       {cars.map((car) => (
-        <div key={car.id} className="border p-4">
-          <h2 className="text-xl font-bold">
-            {car.manufacturer} {car.model}
-          </h2>
+        <div key={car.id} className="car-card">
           <img
             src={car.pictures}
             alt={`Picture of ${car.manufacturer} ${car.model}`}
-            width={200}
-            height={150}
           />
-          <p>{car.description}</p>
-          <p>Price: ${car.price}</p>
-          <p>Location: {car.location}</p>
+          <div className="car-card-content">
+            <h2 className="car-card-title">
+              {car.manufacturer} {car.model}
+            </h2>
+            <p className="car-card-description">{car.description}</p>
+            <p className="car-card-price">Price: ${car.price}</p>
+            <p className="car-card-location">Location: {car.location}</p>
 
-          {isAdmin && (
-            <button
-              onClick={() => handleDelete(car.id)}
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
-            >
-              Delete
-            </button>
-          )}
+            {isAdmin && (
+              <button
+                onClick={() => handleDelete(car.id)}
+                className="delete-button"
+              >
+                Delete
+              </button>
+            )}
+          </div>
         </div>
       ))}
     </div>
