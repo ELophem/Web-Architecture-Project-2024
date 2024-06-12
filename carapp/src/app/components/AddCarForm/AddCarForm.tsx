@@ -53,15 +53,90 @@ export default function AddCarForm() {
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <Input label="Manufacturer" value={manufacturer} onChange={(e) => setManufacturer(e.target.value)} required />
-        <Input label="Model" value={model} onChange={(e) => setModel(e.target.value)} required />
-        <Input label="Pictures (Please enter a valid URL)" value={pictures} onChange={(e) => setPictures(e.target.value)} />
-        <Input label="Description" value={description} onChange={(e) => setDescription(e.target.value)} required />
-        <Input label="Price" value={price} type="number" onChange={(e) => setPrice(e.target.value)} required />
-        <Input label="Location" value={location} onChange={(e) => setLocation(e.target.value)} required />
-        <Button type="submit">Add Car</Button>
+        <div className="grid-container">
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="manufacturer">
+              Manufacturer
+            </label>
+            <input
+              id="manufacturer"
+              value={manufacturer}
+              onChange={(e) => setManufacturer(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="model">
+              Model
+            </label>
+            <input
+              id="model"
+              value={model}
+              onChange={(e) => setModel(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="pictures">
+              Pictures (Please enter a valid URL)
+            </label>
+            <input
+              id="pictures"
+              value={pictures}
+              onChange={(e) => setPictures(e.target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="description">
+              Description
+            </label>
+            <input
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="price">
+              Price
+            </label>
+            <input
+              id="price"
+              value={price}
+              type="number"
+              onChange={(e) => setPrice(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+          <div className="form-group">
+            <label className="block text-sm font-bold mb-2" htmlFor="location">
+              Location
+            </label>
+            <input
+              id="location"
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              required
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+        </div>
+        {formSubmitMessage && <p className="text-green-500 text-xs italic">{formSubmitMessage}</p>}
+        <div className="mb-4">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Add Car
+          </button>
+        </div>
       </form>
-      <p>{formSubmitMessage}</p>
     </div>
   );
 }
